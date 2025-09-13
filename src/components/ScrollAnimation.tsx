@@ -1,7 +1,6 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { CheckCircle, Target, Lightbulb, Rocket } from 'lucide-react';
-import './ScrollAnimation.css'
 
 const ScrollAnimation: React.FC = () => {
   const features = [
