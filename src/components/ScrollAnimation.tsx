@@ -1,6 +1,7 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { CheckCircle, Target, Lightbulb, Rocket } from 'lucide-react';
+import './ScrollAnimation.css'
 
 const ScrollAnimation: React.FC = () => {
   const features = [
@@ -29,14 +30,15 @@ const ScrollAnimation: React.FC = () => {
   return (
     <section className="section-padding">
       <Container>
-        <Row className="align-items-center">
-          <Col lg={6} className="mb-5 mb-lg-0">
-            <div className="fade-in-left">
-              <h2 className="display-5 fw-bold mb-4 parallax-element" data-speed="0.2">
+        {/* Removed align-items-center to stop vertical centering */}
+        <Row>
+          <Col lg={6} className="mb-lg-0">
+            <div className="fade-in-left" style={{ paddingTop: "150px" }}>
+              <h2 className="display-5 fw-bold parallax-element" data-speed="0.2" style={{ marginBottom: "8px !important", lineHeight: "1.2" }}>
                 Why Choose
                 <span className="gradient-text d-block">Our Platform?</span>
               </h2>
-              <p className="lead mb-4 fade-in-left stagger-1" style={{ color: 'var(--text-light)' }}>
+              <p className="lead mb-5 fade-in-left stagger-1" style={{ marginBottom: "12px !important", marginTop: "0 !important", color: 'var(--text-light)', lineHeight: "1.4" }}>
                 We believe learning should be joyful, engaging, and effective. Our platform combines 
                 cutting-edge technology with proven educational methodologies.
               </p>
@@ -49,7 +51,6 @@ const ScrollAnimation: React.FC = () => {
                     style={{ animationDelay: `${index * 0.15}s` }}
                   >
                     <div 
-                      className="feature-icon me-3 flex-shrink-0"
                       style={{
                         background: 'linear-gradient(135deg, var(--primary-peach), var(--accent-coral))',
                         borderRadius: '50%',
@@ -60,7 +61,7 @@ const ScrollAnimation: React.FC = () => {
                         justifyContent: 'center',
                         color: 'white'
                       }}
-                      className="interactive-logo morphing-shape"
+                      className="interactive-logo morphing-shape me-3 flex-shrink-0"
                     >
                       {feature.icon}
                     </div>
@@ -84,13 +85,14 @@ const ScrollAnimation: React.FC = () => {
                 style={{
                   background: 'linear-gradient(135deg, var(--light-peach), var(--secondary-peach))',
                   borderRadius: '30px',
+                  marginTop: '450px',
                   padding: '40px',
                   textAlign: 'center',
                   position: 'relative',
                   overflow: 'hidden'
                 }}
               >
-                {/* Animated People in this section */}
+                {/* Animated People */}
                 <div 
                   className="animated-person"
                   style={{
@@ -117,6 +119,7 @@ const ScrollAnimation: React.FC = () => {
                   👩‍🎓
                 </div>
 
+                {/* Floating elements */}
                 <div className="floating-elements">
                   <div 
                     className="floating-animation interactive-logo"

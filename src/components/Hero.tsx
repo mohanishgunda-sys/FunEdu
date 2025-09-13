@@ -17,8 +17,8 @@ const Hero: React.FC = () => {
             <div 
               className="animated-person"
               style={{
-                top: '10%',
-                left: '5%',
+                top: '80%',
+                left: '60%',
                 fontSize: '4rem',
                 animationDelay: '0s'
               }}
@@ -30,9 +30,9 @@ const Hero: React.FC = () => {
             <div 
               className="animated-person"
               style={{
-                top: '60%',
-                left: '10%',
-                fontSize: '3.5rem',
+                top: '-20%',
+                left: '40%',
+                fontSize: '4.5rem',
                 animationDelay: '1s'
               }}
               onClick={() => handlePersonClick('student')}
@@ -44,7 +44,7 @@ const Hero: React.FC = () => {
               className="animated-person"
               style={{
                 top: '30%',
-                right: '15%',
+                right: '5%',
                 fontSize: '3rem',
                 animationDelay: '2s'
               }}
@@ -54,7 +54,7 @@ const Hero: React.FC = () => {
             </div>
 
             <div className="hero-content fade-in-left">
-              <h1 className="display-3 fw-bold mb-4">
+              <h1 className="display-3 fw-bold mb-4 mt-2">
                 Learning Made
                 <span className="gradient-text d-block">Magical!</span>
               </h1>
@@ -95,7 +95,7 @@ const Hero: React.FC = () => {
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  boxShadow: '0 5px 15px rgba(255, 182, 193, 0.3)'
+                  boxShadow: '0 5px 15px rgba(255, 182, 193, 0.33)'
                 }}
                 className="interactive-logo glow-effect">
                   <Heart color="white" size={28} />
@@ -152,7 +152,7 @@ const Hero: React.FC = () => {
                 padding: '40px',
                 margin: '0 auto',
                 maxWidth: '300px',
-                boxShadow: '0 20px 40px rgba(255, 207, 158, 0.4)',
+                boxShadow: '0 20px 40px rgba(255, 207, 158, 0.52)',
                 animation: 'pulse 2s ease-in-out infinite'
               }}>
                 <div style={{
