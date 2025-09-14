@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Navbar as BSNavbar, Nav, Container } from 'react-bootstrap';
 import { BookOpen, Home, Info, ShoppingBag, Briefcase, User } from 'lucide-react';
 
 const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -53,7 +55,14 @@ const Navbar: React.FC = () => {
               <Briefcase size={18} className="me-1" />
               Career
             </Nav.Link>
-            <Nav.Link href="#user" className="nav-item-custom">
+            <Nav.Link 
+              href="#user" 
+              className="nav-item-custom"
+              onClick={(e) => {
+                e.preventDefault();
+                navigate('/dashboard');
+              }}
+            >
               <User size={18} className="me-1" />
               User
             </Nav.Link>
@@ -61,7 +70,7 @@ const Navbar: React.FC = () => {
         </BSNavbar.Collapse>
       </Container>
 
-      <style jsx>{`
+      <style>{`
         .nav-item-custom {
           position: relative;
           color: var(--text-dark) !important;

@@ -90,7 +90,7 @@ const Testimonials: React.FC = () => {
                 <Card.Body className="p-4">
                   <div className="d-flex align-items-center mb-3">
                     <div 
-                      className="avatar-container me-3 floating-animation"
+                      className="avatar-container me-3 floating-animation interactive-logo"
                       style={{
                         width: '60px',
                         height: '60px',
@@ -102,7 +102,6 @@ const Testimonials: React.FC = () => {
                         fontSize: '1.8rem',
                         animationDelay: `${index * 0.2}s`
                       }}
-                      className="interactive-logo"
                     >
                       {testimonial.avatar}
                     </div>

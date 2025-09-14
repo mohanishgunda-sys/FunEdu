@@ -95,7 +95,7 @@ const Stats: React.FC = () => {
                 }}
               >
                 <div 
-                  className="icon-container mb-3 mx-auto floating-animation"
+                  className="icon-container mb-3 mx-auto floating-animation interactive-logo glow-effect"
                   style={{
                     width: '80px',
                     height: '80px',
@@ -108,7 +108,6 @@ const Stats: React.FC = () => {
                     position: 'relative',
                     animationDelay: `${index * 0.2}s`
                   }}
-                  className="interactive-logo glow-effect"
                 >
                   {stat.icon}
                   <span 

@@ -78,7 +78,7 @@ const ContentCards: React.FC = () => {
               >
                 <Card.Body className="p-4 text-center">
                   <div 
-                    className="icon-wrapper mb-4 mx-auto floating-animation"
+                    className="icon-wrapper mb-4 mx-auto floating-animation interactive-logo glow-effect"
                     style={{
                       background: `linear-gradient(135deg, ${card.color}, var(--secondary-peach))`,
                       borderRadius: '50%',
@@ -91,7 +91,6 @@ const ContentCards: React.FC = () => {
                       position: 'relative',
                       animationDelay: `${index * 0.2}s`
                     }}
-                    className="interactive-logo glow-effect"
                   >
                     {card.icon}
                     <span 

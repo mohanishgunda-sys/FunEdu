@@ -1,15 +1,19 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import ContentCards from './components/ContentCards';
-import ScrollAnimation from './components/ScrollAnimation';
-import Teachers from './components/Teachers';
-import Stats from './components/Stats';
-import Testimonials from './components/Testimonials';
-import FunSection from './components/FunSection';
-import Footer from './components/Footer';
+import {
+  Navbar,
+  Hero,
+  ContentCards,
+  ScrollAnimation,
+  Teachers,
+  Stats,
+  Testimonials,
+  FunSection,
+  Footer,
+  Dashboard
+} from './components';
 
 function App() {
   useEffect(() => {
@@ -27,18 +31,17 @@ function App() {
       // Parallax effects
       const parallaxElements = document.querySelectorAll('.parallax-element');
       parallaxElements.forEach((element) => {
-        const speed = element.getAttribute('data-speed') || 0.5;
+        const speed = parseFloat(element.getAttribute('data-speed') || '0.5');
         const yPos = -(window.pageYOffset * speed);
-        element.style.transform = `translateY(${yPos}px)`;
+        (element as HTMLElement).style.transform = `translateY(${yPos}px)`;
       });
 
       // Interactive people movement
       const people = document.querySelectorAll('.animated-person');
       people.forEach((person, index) => {
-        const speed = 0.1 + (index * 0.05);
         const yPos = Math.sin(window.pageYOffset * 0.001 + index) * 10;
         const xPos = Math.cos(window.pageYOffset * 0.001 + index) * 5;
-        person.style.transform = `translate(${xPos}px, ${yPos}px)`;
+        (person as HTMLElement).style.transform = `translate(${xPos}px, ${yPos}px)`;
       });
     };
 
@@ -46,9 +49,8 @@ function App() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  return (
-    <div className="App">
-      <Navbar />
+  const HomePage = () => (
+    <>
       <Hero />
       <ContentCards />
       <ScrollAnimation />
@@ -57,7 +59,19 @@ function App() {
       <Testimonials />
       <FunSection />
       <Footer />
-    </div>
+    </>
+  );
+
+  return (
+    <Router>
+      <div className="App">
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 

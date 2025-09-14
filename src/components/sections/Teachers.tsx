@@ -72,7 +72,7 @@ const Teachers: React.FC = () => {
               >
                 <Card.Body className="text-center p-4">
                   <div 
-                    className="teacher-avatar mb-3 mx-auto floating-animation"
+                    className="teacher-avatar mb-3 mx-auto floating-animation interactive-logo glow-effect"
                     style={{
                       width: '100px',
                       height: '100px',
@@ -86,7 +86,6 @@ const Teachers: React.FC = () => {
                       position: 'relative',
                       animationDelay: `${index * 0.2}s`
                     }}
-                    className="interactive-logo glow-effect"
                   >
                     {teacher.avatar}
                     <div 
