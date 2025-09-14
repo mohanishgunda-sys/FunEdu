@@ -61,7 +61,6 @@ const Dashboard: React.FC = () => {
 
   // Mock calendar data
   const currentMonth = new Date().toLocaleString('default', { month: 'long', year: 'numeric' });
-  const calendarDays = Array.from({ length: 31 }, (_, i) => i + 1);
 
   return (
     <div style={{ 
@@ -146,8 +145,8 @@ const Dashboard: React.FC = () => {
                 <Card className="border-0 shadow-sm mb-3" style={{ borderRadius: '15px' }}>
                   <Card.Header className="bg-transparent border-0 p-3 pb-0">
                     <div className="d-flex justify-content-between align-items-center">
-                      <h6 className="mb-0">Activity</h6>
-                      <Badge bg="secondary" style={{ borderRadius: '12px' }}>
+                      <h6 className="mb-0" style={{ fontSize: '14px' }}>Recent Activity</h6>
+                      <Badge bg="secondary" style={{ borderRadius: '12px', fontSize: '11px' }}>
                         {activities.length}
                       </Badge>
                     </div>
@@ -155,23 +154,57 @@ const Dashboard: React.FC = () => {
                   <Card.Body className="p-3">
                     <Row>
                       {activities.map(activity => (
-                        <Col md={6} key={activity.id} className="mb-2">
-                          <div className="d-flex align-items-center justify-content-between p-2 rounded" 
-                               style={{ background: 'var(--light-peach)' }}>
-                            <div className="d-flex align-items-center">
-                              <div className="me-2">
-                                {activity.type === 'lesson' && <BookOpen size={18} style={{ color: 'var(--accent-coral)' }} />}
-                                {activity.type === 'assignment' && <Target size={18} style={{ color: 'var(--accent-pink)' }} />}
-                                {activity.type === 'quiz' && <Award size={18} style={{ color: 'var(--accent-lavender)' }} />}
+                        <Col md={6} key={activity.id} className="mb-3">
+                          <div className="p-3 rounded border" 
+                               style={{ 
+                                 background: activity.type === 'lesson' ? 'var(--light-peach)' : 
+                                            activity.type === 'assignment' ? 'var(--accent-lavender)' : 
+                                            'var(--secondary-peach)',
+                                 borderColor: activity.type === 'lesson' ? 'var(--accent-coral)' : 
+                                             activity.type === 'assignment' ? 'var(--accent-pink)' : 
+                                             'var(--primary-peach)',
+                                 borderWidth: '1px',
+                                 borderStyle: 'solid'
+                               }}>
+                            <div className="d-flex align-items-start justify-content-between">
+                              <div className="d-flex align-items-start">
+                                <div className="me-3 mt-1">
+                                  {activity.type === 'lesson' && <BookOpen size={20} style={{ color: 'var(--accent-coral)' }} />}
+                                  {activity.type === 'assignment' && <Target size={20} style={{ color: 'var(--accent-pink)' }} />}
+                                  {activity.type === 'quiz' && <Award size={20} style={{ color: '#8B5CF6' }} />}
+                                </div>
+                                <div>
+                                  <div className="fw-semibold mb-1" style={{ fontSize: '14px' }}>
+                                    {activity.name}
+                                  </div>
+                                  <div className="text-muted mb-1" style={{ fontSize: '12px' }}>
+                                    {activity.date}
+                                  </div>
+                                  <div className="d-flex align-items-center">
+                                    <span className="badge me-2" 
+                                          style={{ 
+                                            background: activity.type === 'lesson' ? 'var(--accent-coral)' : 
+                                                       activity.type === 'assignment' ? 'var(--accent-pink)' : '#8B5CF6',
+                                            color: 'white',
+                                            fontSize: '10px',
+                                            textTransform: 'capitalize'
+                                          }}>
+                                      {activity.type}
+                                    </span>
+                                    <span className="text-muted" style={{ fontSize: '11px' }}>
+                                      {activity.completed ? 'Completed' : 'Pending'}
+                                    </span>
+                                  </div>
+                                </div>
                               </div>
-                              <div>
-                                <div className="fw-semibold small">{activity.name}</div>
-                                <small className="text-muted" style={{ fontSize: '10px' }}>{activity.date}</small>
+                              <div className="text-end">
+                                <Badge 
+                                  bg={activity.completed ? 'success' : 'warning'} 
+                                  style={{ borderRadius: '8px', fontSize: '11px' }}>
+                                  +{activity.points} pts
+                                </Badge>
                               </div>
                             </div>
-                            <Badge bg="warning" style={{ borderRadius: '8px', fontSize: '10px' }}>
-                              +{activity.points}
-                            </Badge>
                           </div>
                         </Col>
                       ))}
@@ -188,8 +221,8 @@ const Dashboard: React.FC = () => {
                 <Card className="border-0 shadow-sm mb-3" style={{ borderRadius: '15px' }}>
                   <Card.Header className="bg-transparent border-0 p-3 pb-0">
                     <div className="d-flex justify-content-between align-items-center">
-                      <h6 className="mb-0">Courses</h6>
-                      <Badge bg="secondary" style={{ borderRadius: '12px' }}>
+                      <h6 className="mb-0" style={{ fontSize: '14px' }}>Courses</h6>
+                      <Badge bg="secondary" style={{ borderRadius: '12px', fontSize: '11px' }}>
                         {courses.length}
                       </Badge>
                     </div>
@@ -252,8 +285,8 @@ const Dashboard: React.FC = () => {
                             </div>
                             
                             <div className="mt-3">
-                              <div className="fw-semibold small">{course.name}</div>
-                              <small className="text-muted" style={{ fontSize: '10px' }}>
+                              <div className="fw-semibold" style={{ fontSize: '14px' }}>{course.name}</div>
+                              <small className="text-muted" style={{ fontSize: '12px' }}>
                                 Rank #{course.rank} of {course.totalStudents}
                               </small>
                             </div>
@@ -261,16 +294,16 @@ const Dashboard: React.FC = () => {
                             <div className="mt-2">
                               <div className="d-flex justify-content-between text-center">
                                 <div>
-                                  <div className="fw-bold" style={{ fontSize: '10px', color: 'var(--accent-coral)' }}>
+                                  <div className="fw-bold" style={{ fontSize: '12px', color: 'var(--accent-coral)' }}>
                                     {Math.round(course.progress * 0.8)}%
                                   </div>
-                                  <small style={{ fontSize: '8px', color: 'var(--text-light)' }}>Completed</small>
+                                  <small style={{ fontSize: '11px', color: 'var(--text-light)' }}>Completed</small>
                                 </div>
                                 <div>
-                                  <div className="fw-bold" style={{ fontSize: '10px', color: 'var(--accent-pink)' }}>
+                                  <div className="fw-bold" style={{ fontSize: '12px', color: 'var(--accent-pink)' }}>
                                     {100 - Math.round(course.progress * 0.8)}%
                                   </div>
-                                  <small style={{ fontSize: '8px', color: 'var(--text-light)' }}>Remaining</small>
+                                  <small style={{ fontSize: '11px', color: 'var(--text-light)' }}>Remaining</small>
                                 </div>
                               </div>
                             </div>
@@ -287,8 +320,8 @@ const Dashboard: React.FC = () => {
                 <Card className="border-0 shadow-sm mb-3" style={{ borderRadius: '15px' }}>
                   <Card.Header className="bg-transparent border-0 p-3 pb-0">
                     <div className="d-flex justify-content-between align-items-center">
-                      <h6 className="mb-0">Games</h6>
-                      <Badge bg="secondary" style={{ borderRadius: '12px' }}>
+                      <h6 className="mb-0" style={{ fontSize: '14px' }}>Games</h6>
+                      <Badge bg="secondary" style={{ borderRadius: '12px', fontSize: '11px' }}>
                         {games.length}
                       </Badge>
                     </div>
@@ -302,11 +335,11 @@ const Dashboard: React.FC = () => {
                             {game.icon}
                           </div>
                           <div>
-                            <div className="fw-semibold small">{game.name}</div>
-                            <small className="text-muted" style={{ fontSize: '10px' }}>{game.difficulty}</small>
+                            <div className="fw-semibold" style={{ fontSize: '14px' }}>{game.name}</div>
+                            <small className="text-muted" style={{ fontSize: '12px' }}>{game.difficulty}</small>
                           </div>
                         </div>
-                        <Badge bg="success" style={{ borderRadius: '8px', fontSize: '10px' }}>
+                        <Badge bg="success" style={{ borderRadius: '8px', fontSize: '11px' }}>
                           {game.points} pts
                         </Badge>
                       </div>
@@ -322,37 +355,82 @@ const Dashboard: React.FC = () => {
             {/* Scheduled Section */}
             <Card className="border-0 shadow-sm mb-3" style={{ borderRadius: '15px' }}>
               <Card.Header className="bg-transparent border-0 p-3 pb-0">
-                <h6 className="mb-0">Scheduled</h6>
+                <h6 className="mb-0" style={{ fontSize: '14px' }}>Scheduled</h6>
               </Card.Header>
               <Card.Body className="p-3">
                 {/* Calendar */}
-                <div className="mb-3">
-                  <div className="d-flex align-items-center mb-2">
-                    <Calendar size={16} className="me-2" style={{ color: 'var(--accent-coral)' }} />
-                    <small className="fw-semibold">{currentMonth}</small>
+                <div className="mb-4">
+                  <div className="d-flex align-items-center justify-content-between mb-3">
+                    <div className="d-flex align-items-center">
+                      <Calendar size={18} className="me-2" style={{ color: 'var(--accent-coral)' }} />
+                      <span className="fw-semibold" style={{ fontSize: '14px' }}>{currentMonth}</span>
+                    </div>
+                    <div className="d-flex">
+                      <button className="btn btn-sm btn-outline-secondary me-1" style={{ fontSize: '12px', padding: '2px 8px' }}>‹</button>
+                      <button className="btn btn-sm btn-outline-secondary" style={{ fontSize: '12px', padding: '2px 8px' }}>›</button>
+                    </div>
                   </div>
-                  <div className="row g-1 mb-2">
-                    {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map((day, index) => (
+                  
+                  {/* Calendar Header */}
+                  <div className="row g-0 mb-2 border-bottom pb-2">
+                    {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((day, index) => (
                       <div key={index} className="col text-center">
-                        <small className="text-muted fw-semibold" style={{ fontSize: '9px' }}>{day}</small>
+                        <div className="fw-semibold text-muted" style={{ fontSize: '12px' }}>{day}</div>
                       </div>
                     ))}
                   </div>
-                  <div className="row g-1">
-                    {calendarDays.slice(0, 21).map(day => (
-                      <div key={day} className="col text-center">
-                        <div className={`py-1 px-1 rounded ${day === 15 ? 'text-white' : 'text-muted'}`}
-                             style={{ 
-                               cursor: 'pointer',
-                               fontSize: '10px',
-                               background: day === 15 ? 'var(--accent-coral)' : 'transparent',
-                               minHeight: '20px',
-                               display: 'flex',
-                               alignItems: 'center',
-                               justifyContent: 'center'
-                             }}>
-                          {day}
-                        </div>
+                  
+                  {/* Calendar Days */}
+                  <div className="calendar-grid">
+                    {Array.from({ length: 6 }, (_, weekIndex) => (
+                      <div key={weekIndex} className="row g-0">
+                        {Array.from({ length: 7 }, (_, dayIndex) => {
+                          const dayNumber = weekIndex * 7 + dayIndex - 2; // Start from day -2 to show previous month
+                          const isCurrentMonth = dayNumber > 0 && dayNumber <= 31;
+                          const isToday = dayNumber === 15;
+                          const hasEvent = [3, 7, 15, 22, 28].includes(dayNumber);
+                          
+                          return (
+                            <div key={dayIndex} className="col text-center">
+                              <div 
+                                className={`calendar-day ${isToday ? 'today' : ''} ${hasEvent ? 'has-event' : ''}`}
+                                style={{ 
+                                  cursor: 'pointer',
+                                  fontSize: '14px',
+                                  padding: '8px 4px',
+                                  margin: '1px',
+                                  borderRadius: '6px',
+                                  background: isToday ? 'var(--accent-coral)' : 
+                                             hasEvent ? 'var(--light-peach)' : 'transparent',
+                                  color: isToday ? 'white' : 
+                                         !isCurrentMonth ? '#ccc' : 'var(--text-dark)',
+                                  fontWeight: isToday ? 'bold' : 'normal',
+                                  border: hasEvent && !isToday ? '1px solid var(--accent-coral)' : '1px solid transparent',
+                                  minHeight: '32px',
+                                  display: 'flex',
+                                  alignItems: 'center',
+                                  justifyContent: 'center',
+                                  position: 'relative'
+                                }}>
+                                {isCurrentMonth ? dayNumber : dayNumber <= 0 ? 30 + dayNumber : dayNumber - 31}
+                                {hasEvent && (
+                                  <div 
+                                    style={{
+                                      position: 'absolute',
+                                      bottom: '2px',
+                                      left: '50%',
+                                      transform: 'translateX(-50%)',
+                                      width: '4px',
+                                      height: '4px',
+                                      borderRadius: '50%',
+                                      background: isToday ? 'white' : 'var(--accent-coral)'
+                                    }}
+                                  />
+                                )}
+                              </div>
+                            </div>
+                          );
+                        })}
                       </div>
                     ))}
                   </div>
@@ -360,40 +438,55 @@ const Dashboard: React.FC = () => {
 
                 {/* Upcoming */}
                 <div>
-                  <div className="d-flex align-items-center mb-2">
+                  <div className="d-flex align-items-center mb-3">
                     <Clock size={16} className="me-2" style={{ color: 'var(--accent-coral)' }} />
-                    <small className="fw-semibold">Upcoming</small>
+                    <span className="fw-semibold" style={{ fontSize: '14px' }}>Upcoming Events</span>
                   </div>
-                  <div className="mb-2 p-2 rounded" style={{ background: 'var(--light-peach)' }}>
-                    <div className="d-flex align-items-center">
-                      <div className="me-2 text-center">
-                        <div className="fw-bold small" style={{ color: 'var(--accent-coral)', fontSize: '10px' }}>09:00</div>
-                      </div>
+                  <div className="mb-2 p-3 rounded border-start" 
+                       style={{ 
+                         background: 'var(--light-peach)', 
+                         borderLeftColor: 'var(--accent-coral)',
+                         borderLeftWidth: '3px'
+                       }}>
+                    <div className="d-flex align-items-center justify-content-between">
                       <div>
-                        <div className="fw-semibold" style={{ fontSize: '11px' }}>Course Name: Lesson</div>
-                        <small className="text-muted" style={{ fontSize: '9px' }}>Jan 4, 09:00</small>
+                        <div className="fw-semibold" style={{ fontSize: '14px' }}>Course Name: Lesson</div>
+                        <small className="text-muted" style={{ fontSize: '12px' }}>Jan 4, 09:00 AM</small>
+                      </div>
+                      <div className="text-end">
+                        <div className="fw-bold" style={{ fontSize: '12px', color: 'var(--accent-coral)' }}>09:00</div>
                       </div>
                     </div>
                   </div>
-                  <div className="mb-2 p-2 rounded" style={{ background: 'var(--light-peach)' }}>
-                    <div className="d-flex align-items-center">
-                      <div className="me-2 text-center">
-                        <div className="fw-bold small" style={{ color: 'var(--accent-coral)', fontSize: '10px' }}>10:00</div>
-                      </div>
+                  <div className="mb-2 p-3 rounded border-start" 
+                       style={{ 
+                         background: 'var(--light-peach)', 
+                         borderLeftColor: 'var(--accent-pink)',
+                         borderLeftWidth: '3px'
+                       }}>
+                    <div className="d-flex align-items-center justify-content-between">
                       <div>
-                        <div className="fw-semibold" style={{ fontSize: '11px' }}>Course Name: Test</div>
-                        <small className="text-muted" style={{ fontSize: '9px' }}>Jan 4, 10:00</small>
+                        <div className="fw-semibold" style={{ fontSize: '14px' }}>Course Name: Test</div>
+                        <small className="text-muted" style={{ fontSize: '12px' }}>Jan 4, 10:00 AM</small>
+                      </div>
+                      <div className="text-end">
+                        <div className="fw-bold" style={{ fontSize: '12px', color: 'var(--accent-pink)' }}>10:00</div>
                       </div>
                     </div>
                   </div>
-                  <div className="p-2 rounded" style={{ background: 'var(--accent-lavender)' }}>
-                    <div className="d-flex align-items-center">
-                      <div className="me-2 text-center">
-                        <div className="fw-bold small" style={{ color: 'var(--text-dark)', fontSize: '10px' }}>15:00</div>
-                      </div>
+                  <div className="p-3 rounded border-start" 
+                       style={{ 
+                         background: 'var(--accent-lavender)', 
+                         borderLeftColor: '#8B5CF6',
+                         borderLeftWidth: '3px'
+                       }}>
+                    <div className="d-flex align-items-center justify-content-between">
                       <div>
-                        <div className="fw-semibold" style={{ fontSize: '11px' }}>Extracurricular activities</div>
-                        <small className="text-muted" style={{ fontSize: '9px' }}>Apr 2, 15:00</small>
+                        <div className="fw-semibold" style={{ fontSize: '14px' }}>Extracurricular Activities</div>
+                        <small className="text-muted" style={{ fontSize: '12px' }}>Apr 2, 03:00 PM</small>
+                      </div>
+                      <div className="text-end">
+                        <div className="fw-bold" style={{ fontSize: '12px', color: '#8B5CF6' }}>15:00</div>
                       </div>
                     </div>
                   </div>
