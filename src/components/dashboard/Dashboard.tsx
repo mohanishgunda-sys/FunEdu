@@ -28,7 +28,7 @@ interface Course {
 
 const Dashboard: React.FC = () => {
   const [userStats] = useState({
-    name: 'Yev',
+    name: 'Frank',
     totalLectures: 300,
     completedLectures: 204,
     totalPoints: 2040,
