@@ -21,17 +21,18 @@ import { AuthProvider } from './contexts/AuthContext';
 function App() {
   useEffect(() => {
     const handleScroll = () => {
-      const elements = document.querySelectorAll('.animate-on-scroll, .fade-in-up, .fade-in-left, .fade-in-right, .scale-in');
+      const elements = document.querySelectorAll(
+        '.animate-on-scroll, .fade-in-up, .fade-in-left, .fade-in-right, .scale-in'
+      );
       elements.forEach((element) => {
         const elementTop = element.getBoundingClientRect().top;
         const elementVisible = 150;
-        
         if (elementTop < window.innerHeight - elementVisible) {
           element.classList.add('active');
         }
       });
 
-      // Parallax effects
+      // Parallax
       const parallaxElements = document.querySelectorAll('.parallax-element');
       parallaxElements.forEach((element) => {
         const speed = parseFloat(element.getAttribute('data-speed') || '0.5');
@@ -39,7 +40,7 @@ function App() {
         (element as HTMLElement).style.transform = `translateY(${yPos}px)`;
       });
 
-      // Interactive people movement
+      // Animated people
       const people = document.querySelectorAll('.animated-person');
       people.forEach((person, index) => {
         const yPos = Math.sin(window.pageYOffset * 0.001 + index) * 10;
