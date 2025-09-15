@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Card, Badge, ProgressBar } from 'react-bootstrap';
 import { 
   Calendar, 
@@ -8,6 +8,7 @@ import {
   Target,
   Star
 } from 'lucide-react';
+import { useAuth } from '../../contexts/AuthContext';
 
 interface Activity {
   id: number;
@@ -27,8 +28,8 @@ interface Course {
 }
 
 const Dashboard: React.FC = () => {
+  const { user } = useAuth();
   const [userStats] = useState({
-    name: 'Frank',
     totalLectures: 300,
     completedLectures: 204,
     totalPoints: 2040,
@@ -62,6 +63,9 @@ const Dashboard: React.FC = () => {
   // Mock calendar data
   const currentMonth = new Date().toLocaleString('default', { month: 'long', year: 'numeric' });
 
+  // Get user's first name for greeting
+  const firstName = user?.name?.split(' ')[0] || 'Student';
+
   return (
     <div style={{ 
       background: 'var(--warm-white)', 
@@ -83,8 +87,11 @@ const Dashboard: React.FC = () => {
                     {userStats.profilePicture}
                   </div>
                   <div>
-                    <h3 className="mb-1" style={{ color: 'var(--text-dark)' }}>Hey {userStats.name},</h3>
+                    <h3 className="mb-1" style={{ color: 'var(--text-dark)' }}>Hey {firstName},</h3>
                     <p className="mb-0" style={{ color: 'var(--text-light)' }}>It's sunny today and it's time to study 📚</p>
+                    {user?.className && (
+                      <small style={{ color: 'var(--text-light)' }}>Class: {user.className}</small>
+                    )}
                   </div>
                 </div>
               </Card.Body>

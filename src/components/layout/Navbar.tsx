@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Navbar as BSNavbar, Nav, Container } from 'react-bootstrap';
-import { BookOpen, Home, Info, ShoppingBag, Briefcase, LogIn, LogOut } from 'lucide-react';
+import { BookOpen, Home, Info, ShoppingBag, Briefcase, LogIn, LogOut, User } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 
 const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
   const navigate = useNavigate();
-  const { isAuthenticated, logout } = useAuth();
+  const { isAuthenticated, user, logout } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -18,6 +18,15 @@ const Navbar: React.FC = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const handleLogout = async () => {
+    await logout();
+    navigate('/');
+  };
+
+  const handleDashboard = () => {
+    navigate('/dashboard');
+  };
 
   return (
     <BSNavbar 
@@ -57,19 +66,32 @@ const Navbar: React.FC = () => {
               <Briefcase size={18} className="me-1" />
               Career
             </Nav.Link>
+            
             {isAuthenticated ? (
-              <Nav.Link 
-                href="#logout" 
-                className="nav-item-custom"
-                onClick={(e) => {
-                  e.preventDefault();
-                  logout();
-                  navigate('/');
-                }}
-              >
-                <LogOut size={18} className="me-1" />
-                Logout
-              </Nav.Link>
+              <>
+                <Nav.Link 
+                  href="#dashboard" 
+                  className="nav-item-custom"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleDashboard();
+                  }}
+                >
+                  <User size={18} className="me-1" />
+                  {user?.name || 'Dashboard'}
+                </Nav.Link>
+                <Nav.Link 
+                  href="#logout" 
+                  className="nav-item-custom"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleLogout();
+                  }}
+                >
+                  <LogOut size={18} className="me-1" />
+                  Logout
+                </Nav.Link>
+              </>
             ) : (
               <Nav.Link 
                 href="#login" 
