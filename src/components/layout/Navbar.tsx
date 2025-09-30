@@ -50,21 +50,49 @@ const Navbar: React.FC = () => {
         <BSNavbar.Toggle aria-controls="basic-navbar-nav" />
         <BSNavbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
-            <Nav.Link href="#home" className="nav-item-custom">
+            <Nav.Link
+              href="#home"
+              className="nav-item-custom"
+              onClick={(e) => {
+                e.preventDefault();
+                navigate('/');
+              }}
+            >
               <Home size={18} className="me-1" />
               Home
             </Nav.Link>
-            <Nav.Link href="#about" className="nav-item-custom">
+            <Nav.Link
+              href="#about"
+              className="nav-item-custom"
+              onClick={(e) => {
+                e.preventDefault();
+                navigate('/about');
+              }}
+            >
               <Info size={18} className="me-1" />
               About
             </Nav.Link>
-            <Nav.Link href="#store" className="nav-item-custom">
+            <Nav.Link
+              href="#store"
+              className="nav-item-custom"
+              onClick={(e) => {
+                e.preventDefault();
+                navigate('/store');
+              }}
+            >
               <ShoppingBag size={18} className="me-1" />
               Store
             </Nav.Link>
-            <Nav.Link href="#career" className="nav-item-custom">
+            <Nav.Link
+              href="#careers"
+              className="nav-item-custom"
+              onClick={(e) => {
+                e.preventDefault();
+                navigate('/careers');
+              }}
+            >
               <Briefcase size={18} className="me-1" />
-              Career
+              Careers
             </Nav.Link>
             
             {isAuthenticated ? (

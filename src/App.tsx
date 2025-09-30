@@ -16,6 +16,7 @@ import {
 } from './components';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
+import { Store, Careers, About } from './components/pages';
 import { AuthProvider } from './contexts/AuthContext';
 
 function App() {
@@ -76,6 +77,9 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/store" element={<Store />} />
+            <Route path="/careers" element={<Careers />} />
+            <Route path="/about" element={<About />} />
           </Routes>
         </div>
       </Router>
