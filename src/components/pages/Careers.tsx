@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Button, Badge } from 'react-bootstrap';
 import { Briefcase, MapPin, Clock, Send, Heart, Users, Target, Lightbulb } from 'lucide-react';
+import ResumeUploadModal from './ResumeUploadModal';
 
 interface Job {
   id: number;
@@ -85,9 +86,22 @@ const values = [
 
 const Careers: React.FC = () => {
   const [appliedJobs, setAppliedJobs] = useState<number[]>([]);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedJob, setSelectedJob] = useState<string | undefined>(undefined);
 
-  const handleApply = (jobId: number) => {
-    setAppliedJobs([...appliedJobs, jobId]);
+  const handleApply = (jobId: number, jobTitle: string) => {
+    setSelectedJob(jobTitle);
+    setShowModal(true);
+  };
+
+  const handleModalClose = () => {
+    setShowModal(false);
+    if (selectedJob) {
+      const job = jobs.find(j => j.title === selectedJob);
+      if (job) {
+        setAppliedJobs([...appliedJobs, job.id]);
+      }
+    }
   };
 
   return (
@@ -214,7 +228,7 @@ const Careers: React.FC = () => {
                     </Col>
                     <Col lg={4} className="d-flex align-items-center justify-content-lg-end">
                       <Button
-                        onClick={() => handleApply(job.id)}
+                        onClick={() => handleApply(job.id, job.title)}
                         disabled={appliedJobs.includes(job.id)}
                         style={{
                           background: appliedJobs.includes(job.id)
@@ -262,6 +276,10 @@ const Careers: React.FC = () => {
             We're always looking for talented people who share our passion for education.
           </p>
           <Button
+            onClick={() => {
+              setSelectedJob(undefined);
+              setShowModal(true);
+            }}
             style={{
               background: 'white',
               color: '#4A90E2',
@@ -276,6 +294,12 @@ const Careers: React.FC = () => {
           </Button>
         </div>
       </Container>
+
+      <ResumeUploadModal
+        show={showModal}
+        onHide={handleModalClose}
+        jobTitle={selectedJob}
+      />
     </div>
   );
 };

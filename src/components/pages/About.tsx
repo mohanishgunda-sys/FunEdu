@@ -224,10 +224,10 @@ const About: React.FC = () => {
         <div className="mb-5">
           <h2 className="text-center fw-bold mb-5" style={{ color: '#333' }}>Meet Our Team</h2>
           <Row className="g-4">
-            {teamMembers.map(member => (
+            {teamMembers.map((member, index) => (
               <Col key={member.id} xs={12} sm={6} lg={4}>
                 <div
-                  className="h-100 fade-in-up"
+                  className="h-100 fade-in-up team-member-card"
                   style={{
                     background: 'white',
                     borderRadius: '20px',
@@ -244,16 +244,50 @@ const About: React.FC = () => {
                     e.currentTarget.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.1)';
                   }}
                 >
-                  <div style={{ height: '280px', overflow: 'hidden' }}>
+                  <div style={{ height: '280px', overflow: 'hidden', position: 'relative' }}>
                     <img
                       src={member.image}
                       alt={member.name}
                       style={{
                         width: '100%',
                         height: '100%',
-                        objectFit: 'cover'
+                        objectFit: 'cover',
+                        transition: 'transform 0.5s ease'
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.transform = 'scale(1.1) rotate(2deg)';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.transform = 'scale(1) rotate(0deg)';
                       }}
                     />
+                    <div
+                      style={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        bottom: 0,
+                        background: 'linear-gradient(to bottom, transparent 0%, transparent 60%, rgba(0,0,0,0.7) 100%)',
+                        opacity: 0,
+                        transition: 'opacity 0.3s ease',
+                        display: 'flex',
+                        alignItems: 'flex-end',
+                        justifyContent: 'center',
+                        padding: '20px'
+                      }}
+                      className="team-member-overlay"
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.opacity = '1';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.opacity = '0';
+                      }}
+                    >
+                      <p className="text-white fw-semibold mb-0" style={{ fontSize: '1.1rem' }}>
+                        {member.role}
+                      </p>
+                    </div>
                   </div>
                   <div style={{ padding: '25px' }}>
                     <h5 className="fw-bold mb-1" style={{ color: '#333' }}>{member.name}</h5>
